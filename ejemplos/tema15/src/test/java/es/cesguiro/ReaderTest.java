@@ -14,19 +14,19 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class ReaderTest {
 
+    private final String PATH = System.getProperty("user.dir") + "\\src\\main\\resources\\";
     //private final Reader reader = new BasicFileReader();
-    private final Reader reader = new BufferFileReader();
+    private final Reader reader = new BasicFileReader();
 
     @Test
     public void testOpenExistingFile() {
-        String fileName = "products.txt";
-        assertInstanceOf(String.class, this.reader.read(fileName));
+        assertInstanceOf(List.class, this.reader.read(this.PATH + "products.txt"));
     }
 
     @Test
     public void testOpenNotExistingFile() {
         RuntimeException exception = assertThrows(RuntimeException.class, () -> {
-            this.reader.read("file_not_exists.txt");
+            this.reader.read(this.PATH + "file_not_exists.txt");
         });
 
         String expectedMessage = "No se encuentra el archivo";
@@ -36,37 +36,43 @@ class ReaderTest {
     }
 
     @Test
-    public void testFileToList() {
-        List<String> products_read = List.of(this.reader.read("products.txt"));
-        List<String> products_expected = List.of("zapatillas\npantalón\ncamiseta\nvestido");
+    public void testReadFile() {
+        List<String> products_read = this.reader.read(this.PATH + "products.txt");
+        List<String> products_expected = List.of("zapatillas", "pantalón", "camiseta", "vestido");
 
         assertEquals(products_expected, products_read);
     }
 
     @Test
     public void testAppendWord() {
-        this.reader.append("products.txt", "\nfalda", true);
+        this.reader.append(this.PATH + "products.txt", "falda", true);
 
-        List<String> products_read = List.of(this.reader.read("products.txt"));
-        List<String> products_expected = List.of("zapatillas\npantalón\ncamiseta\nvestido\nfalda");
+        List<String> products_read = this.reader.read(this.PATH + "products.txt");
+        List<String> products_expected = List.of("zapatillas", "pantalón", "camiseta", "vestido", "falda");
 
         assertEquals(products_expected, products_read);
     }
 
     @Test
     public void testRebuildFile() {
-        this.reader.append("products.txt", "chaqueta\nfalda\nzapatos\nbañador", false);
+        this.reader.append(this.PATH + "products.txt", "chaqueta", false);
 
-        List<String> products_read = List.of(this.reader.read("products.txt"));
-        List<String> products_expected = List.of("chaqueta\nfalda\nzapatos\nbañador");
+        List<String> products_read = this.reader.read(this.PATH + "products.txt");
+        List<String> products_expected = List.of("chaqueta");
 
         assertEquals(products_expected, products_read);
     }
 
 
     @AfterEach
-    public void rebuildFile(){
-        this.reader.append("products.txt", "zapatillas\npantalón\ncamiseta\nvestido", false);
+    public void rebuildFile() throws IOException {
+        new FileWriter(this.PATH + "products.txt", false).close();
+        List<String> original_products = List.of("zapatillas", "pantalón", "camiseta", "vestido");
+        //this.reader.append(this.PATH + "products.txt", null, false);
+        for (String product : original_products) {
+            this.reader.append(this.PATH + "products.txt", product, true);
+        }
+        //this.reader.append("products.txt", "zapatillas\npantalón\ncamiseta\nvestido", false);
     }
 
 }

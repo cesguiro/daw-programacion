@@ -3,21 +3,21 @@ package es.cesguiro.impl;
 import es.cesguiro.Reader;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.List;
 
 public class BufferFileReader implements Reader {
 
-    private final String PATH = System.getProperty("user.dir") + "/src/main/resources/";
-
-    public String read(String fileName) {
-        try (FileReader fileReader = new FileReader(PATH + fileName); BufferedReader bufferedReader = new BufferedReader(fileReader)) {
-            String text = "";
+    public List<String> read(String fileName) {
+        try (FileReader fileReader = new FileReader(fileName); BufferedReader bufferedReader = new BufferedReader(fileReader)) {
+            /*List<String> words = new ArrayList<>();
             String line = bufferedReader.readLine();
             while (line != null) {
-                text += "line";
+                words.add(line);
                 line = bufferedReader.readLine();
             }
-            return text;
+            return words;*/
+            return bufferedReader.lines().toList();
         } catch (FileNotFoundException e) {
             System.out.println("hola");
             throw new RuntimeException("No se encuentra el archivo");
@@ -30,7 +30,7 @@ public class BufferFileReader implements Reader {
 
     @Override
     public void append(String fileName, String word, boolean append) {
-        try (FileWriter fileWriter = new FileWriter(PATH + fileName, append); BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
+        try (FileWriter fileWriter = new FileWriter(fileName, append); BufferedWriter bufferedWriter = new BufferedWriter(fileWriter)) {
             bufferedWriter.newLine();
             bufferedWriter.append(word);
         }catch (FileNotFoundException e) {
