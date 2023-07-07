@@ -10,16 +10,15 @@ import java.util.List;
 
 public class BasicFileReader implements Reader {
 
-    private final String PATH = System.getProperty("user.dir") + "/src/main/resources/";
-    public String read(String fileName) {
-        try (FileReader fileReader = new FileReader(PATH + fileName)) {
+    public List<String> read(String fileName) {
+        try (FileReader fileReader = new FileReader(fileName)) {
             String text = "";
             int ascii_char = fileReader.read();
             while (ascii_char != -1) {
                 text  += (char) ascii_char;
                 ascii_char = fileReader.read();
             }
-            return text;
+           return List.of(text.split("\n"));
         } catch (FileNotFoundException e) {
             throw new RuntimeException("No se encuentra el archivo");
         } catch (IOException e) {
@@ -31,10 +30,11 @@ public class BasicFileReader implements Reader {
 
     @Override
     public void append(String fileName, String word, boolean append) {
-        try (FileWriter fileWriter = new FileWriter(PATH + fileName, append)) {
+        try (FileWriter fileWriter = new FileWriter(fileName, append)) {
             for (int i = 0; i < word.length(); i++) {
                 fileWriter.append(word.charAt(i));
             }
+            fileWriter.append("\n");
         }catch (FileNotFoundException e) {
             throw new RuntimeException("No se encuentra el archivo");
         } catch (IOException e) {
