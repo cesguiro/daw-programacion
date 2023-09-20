@@ -1,4 +1,4 @@
-class Ejercicio2 {
+class Ejercicio1b {
 
     public static void main(String[]args){
         final int BASE = 5;

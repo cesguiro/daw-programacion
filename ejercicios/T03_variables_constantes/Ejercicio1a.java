@@ -7,5 +7,7 @@ class Ejercicio1a {
 
         area = (BASE * HEIGHT) / 2;
         System.out.println("El área del triángulo es " + area);
+
+        //System.out.println("El área del triángulo es " + ((BASE * HEIGHT) / 2));
     }
 }

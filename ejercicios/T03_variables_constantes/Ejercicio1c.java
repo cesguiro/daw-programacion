@@ -1,9 +1,9 @@
-class Ejercicio1a {
+class Ejercicio1c {
 
     public static void main(String[]args){
-        final int BASE = 5;
-        final int HEIGHT = 10;
-        int area;
+        final float BASE = 5;
+        final float HEIGHT = 9;
+        float area;
 
         area = (BASE * HEIGHT) / 2;
         System.out.println("El área del triángulo es " + area);
