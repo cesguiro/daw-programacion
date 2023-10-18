@@ -3,6 +3,7 @@ import java.util.Scanner;
 class Ejercicio3b {
 
     static int compare(int a, int b) {
+        int result = (a>b)? 1 : (a<b)? -1: 0;
         if (a>b) {
             return 1;
         } else if(a<b){

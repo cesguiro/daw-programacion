@@ -42,8 +42,10 @@ public class Ejercicio3c {
             bit = bits%10;
             if(bit == 0) {
                 showBit(board0);
-            } else {
+            } else if (bit == 1){
                 showBit(board1);
+            } else {
+                System.out.println("No se puede representar el bit");
             }
             bits /= 10;
         }
