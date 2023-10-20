@@ -28,7 +28,7 @@ public class Ejercicio3d {
         Scanner reader = new Scanner(System.in);
         int number;
 
-        System.out.print("Escribe un número binario: ");
+        System.out.print("Escribe un número: ");
         number = reader.nextInt();
         showNumber(number);
 
@@ -39,7 +39,7 @@ public class Ejercicio3d {
         int bit;
 
         while (bits >= 1) {
-            bit = bits%10;
+            bit = bits%2;
             if(bit == 0) {
                 showBit(board0);
             } else if(bit == 1){
