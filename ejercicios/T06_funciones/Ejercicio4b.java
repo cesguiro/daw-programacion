@@ -4,7 +4,7 @@ class Ejercicio4b {
         int suma = 0;
         for (int i = 0; i < numbers.length; i++) {
             if((numbers[i]%2) == 1)
-            suma += numbers[i];
+                suma += numbers[i];
         }
         return suma;
     }

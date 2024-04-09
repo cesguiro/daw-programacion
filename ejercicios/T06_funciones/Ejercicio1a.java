@@ -1,7 +1,5 @@
 import java.util.Scanner;
 
-import javax.security.sasl.SaslException;
-
 class Ejercicio1a {
 
     static int sumar(int a, int b) {
@@ -17,7 +15,7 @@ class Ejercicio1a {
     }
 
     static float dividir(int a, int b){
-        return ((float) a) / ((float) b);
+        return (float)a / b;
     }
 
     public static void main(String[] args) {
@@ -28,10 +26,10 @@ class Ejercicio1a {
         a = reader.nextInt();
         System.out.print("Escribe el segundo número: ");
         b = reader.nextInt();
-        System.out.println("Suma: " + Integer.toString(sumar(a, b)));
-        System.out.println("Resta: " + Integer.toString(restar(a, b)));
-        System.out.println("Multiplicación: " + Integer.toString(multiplicar(a, b)));
-        System.out.println("División: " + Float.toString(dividir(a, b)));
+        System.out.println("Suma: " + sumar(a, b));
+        System.out.println("Resta: " + restar(a, b));
+        System.out.println("Multiplicación: " + multiplicar(a, b));
+        System.out.println("División: " + dividir(a, b));
     }
 
 }
