@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head th:replace="~{layouts/base :: head}">
+</head>
+<body>
+<nav th:replace="~{layouts/base:: menu}"></nav>
+
+<div class="container">
+    <div class="row">
+        <div class="col-12 col-sm-8 col-lg-5">
+            <h6 class="text-muted">Listado de películas</h6>
+            <ul class="list-group">
+                <a th:each="movie : ${movieList}" th:href="@{'/movies/' + ${movie.id}}">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <span th:text="${movie.title}" style="font-weight: bold"></span>
+                    </li>
+                </a>
+            </ul>
+        </div>
+    </div>
+</div>
+<footer th:replace="~{layouts/base :: footer}"></footer>
+</body>
+</html>
